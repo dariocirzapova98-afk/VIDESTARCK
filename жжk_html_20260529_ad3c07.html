@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="yandex-verification" content="b0871c9003853d08" />
+    <title>VideStarck — команда разработчиков | Дари & co</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0c12;
+            color: #eef2ff;
+            scroll-behavior: smooth;
+            line-height: 1.5;
+        }
+
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(25, 35, 60, 0.9), #0a0c12 80%);
+            z-index: -2;
+        }
+
+        .noise::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ЗАГЛАВНЫЕ БУКВЫ ДЛЯ НАВИГАЦИИ, ЛОГО, ЗАГОЛОВКОВ, КНОПОК */
+        .logo, .nav-links a, .section-title, .service-item h3, .btn-primary, .btn-outline-light, .team-role, .badge, footer p {
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        h1, h2 {
+            text-transform: uppercase;
+        }
+
+        .team-name, .vibe-note, .dev-level, .hero-desc, .section-sub, .contact-links a, .form-group input, .form-group textarea {
+            text-transform: none;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #C084FC, #60A5FA);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span {
+            font-size: 1rem;
+            font-weight: 400;
+            background: none;
+            -webkit-background-clip: unset;
+            color: #9ca3af;
+            text-transform: lowercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #cbd5e6;
+            font-weight: 600;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover {
+            color: #a78bfa;
+        }
+
+        .btn-ghost {
+            background: rgba(255,255,255,0.05);
+            padding: 8px 18px;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: 0.25s;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(167, 139, 250, 0.2);
+            border-color: #a78bfa;
+            color: #e0e7ff;
+        }
+
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.2);
+            backdrop-filter: blur(4px);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #c4b5fd;
+            margin-bottom: 24px;
+            border: 1px solid rgba(139, 92, 246, 0.4);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            background: linear-gradient(to right, #ffffff, #c7d2fe, #a78bfa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            max-width: 900px;
+            margin: 0 auto 20px;
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            color: #b9c3db;
+            max-width: 650px;
+            margin: 0 auto 32px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(95deg, #8b5cf6, #6d28d9);
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            border: none;
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 8px 20px rgba(109, 40, 217, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            background: linear-gradient(95deg, #9b6eff, #7c3aed);
+            box-shadow: 0 12px 28px rgba(109, 40, 217, 0.5);
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            border: 1px solid #7c7f8c;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .btn-outline-light:hover {
+            border-color: #a78bfa;
+            background: rgba(167, 139, 250, 0.1);
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .section-sub {
+            color: #9ba3bf;
+            max-width: 600px;
+            margin-bottom: 48px;
+            text-transform: none;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 16px;
+        }
+
+        .team-card {
+            background: rgba(18, 22, 35, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 28px 24px;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            border-color: rgba(139, 92, 246, 0.5);
+            transform: translateY(-6px);
+            background: rgba(25, 30, 45, 0.8);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.4);
+        }
+
+        .avatar-icon {
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+            background: linear-gradient(145deg, #2a2f45, #1b1f30);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 60px;
+        }
+
+        .team-name {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .team-role {
+            font-size: 0.8rem;
+            color: #a78bfa;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.05);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin: 4px 5px 0 0;
+            font-weight: 500;
+            color: #cdd9ff;
+        }
+
+        .dev-level {
+            margin: 12px 0 8px;
+            font-size: 0.85rem;
+            color: #cbd5e6;
+        }
+
+        .vibe-note {
+            margin-top: 16px;
+            border-top: 1px dashed rgba(255,255,255,0.1);
+            padding-top: 12px;
+            font-style: italic;
+            font-size: 0.85rem;
+            color: #b9c3db;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .service-item {
+            background: rgba(12, 15, 27, 0.7);
+            backdrop-filter: blur(6px);
+            border-radius: 28px;
+            padding: 28px 20px;
+            transition: all 0.2s;
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+        }
+
+        .service-item i {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #a78bfa, #60a5fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .service-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .service-item p {
+            text-transform: none;
+            font-size: 0.9rem;
+            color: #cbd5e6;
+        }
+
+        .vibe-quote {
+            background: linear-gradient(125deg, #111827, #0c0f1c);
+            border-radius: 48px;
+            padding: 48px 32px;
+            text-align: center;
+            border: 1px solid #2d2f3e;
+        }
+
+        .vibe-quote i {
+            font-size: 2.8rem;
+            color: #c084fc;
+            opacity: 0.7;
+        }
+
+        .vibe-quote p {
+            text-transform: none;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(8px);
+            border-radius: 40px;
+            padding: 32px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: #11141f;
+            border: 1px solid #2a2f3e;
+            border-radius: 28px;
+            font-size: 1rem;
+            color: #f0f3fa;
+            transition: 0.2s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139,92,246,0.2);
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            background: #8b5cf6;
+            border: none;
+            padding: 14px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 48px;
+            flex-wrap: wrap;
+            background: rgba(0,0,0,0.2);
+            padding: 20px 24px;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+        }
+
+        .contact-links a {
+            color: #cdd9ff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-links a:hover {
+            color: #c084fc;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: #6c7289;
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 700px) {
+            h1 { font-size: 2.3rem; }
+            .navbar { flex-direction: column; }
+            .section-title { font-size: 1.6rem; }
+            .contact-links { flex-direction: column; align-items: center; gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+<div class="gradient-bg"></div>
+<div class="noise"></div>
+
+<div class="container">
+    <nav class="navbar">
+        <div class="logo">VIDESTARCK <span>// dev studio</span></div>
+        <div class="nav-links">
+            <a href="#about">О НАС</a>
+            <a href="#team">КОМАНДА</a>
+            <a href="#services">УСЛУГИ</a>
+            <a href="#contact" class="btn-ghost">СТАРТ ПРОЕКТА <i class="fas fa-arrow-right" style="margin-left: 6px;"></i></a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="badge"><i class="fas fa-bolt"></i> ВАЙБ-КОДИНГ · МОЛОДЫЕ ЭКСПЕРТЫ</div>
+        <h1>КОД БЕЗ ГРАНИЦ<br>И ЧИСТАЯ ЭНЕРГИЯ РАЗРАБОТКИ</h1>
+        <div class="hero-desc">
+            Команда из трёх увлечённых профи: senior-архитектура, быстрое обучение и человеческий подход к финансам. 
+            Никакого ООО/ИП — только физические лица, работающие на результат.
+        </div>
+        <div class="btn-group">
+            <a href="#contact" class="btn-primary">ЗАКАЗАТЬ ПРОЕКТ →</a>
+            <a href="#team" class="btn-outline-light">ПОЗНАКОМИТЬСЯ С КОМАНДОЙ</a>
+        </div>
+    </div>
+
+    <section id="about">
+        <div class="section-title">ПОЧЕМУ МЫ — НЕ СТАНДАРТНОЕ БЮРО</div>
+        <div class="section-sub">Мы не зарегистрированы как юрлицо, но у нас выше скорость, гибкость и честные цены. Директор сам пишет код, а бухгалтер помогает с отчётностью для физлиц.</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 28px; justify-content: space-between;">
+            <div style="flex:1; min-width: 220px;">
+                <i class="fas fa-rocket" style="font-size: 2rem; color:#a78bfa;"></i>
+                <h3 style="margin: 16px 0 8px;">СТАРТАП-ДУХ</h3>
+                <p style="color:#b9c3db;">Без бюрократии, но с полной вовлечённостью. Каждый клиент — на связи с разработчиком 24/7.</p>
+            </div>
+            <div style="flex:1; min-width: 220px;">
+                <i class="fas fa-laptop-code" style="font-size: 2rem; color:#a78bfa;"></i>
+                <h3 style="margin: 16px 0 8px;">СЕНЬОР-ЭКСПЕРТИЗА</h3>
+                <p style="color:#b9c3db;">Директор — senior C++ / C# и mid JS, другие ребята быстро растут. Качество на уровне enterprise.</p>
+            </div>
+            <div style="flex:1; min-width: 220px;">
+                <i class="fas fa-hand-peace" style="font-size: 2rem; color:#a78bfa;"></i>
+                <h3 style="margin: 16px 0 8px;">ВАЙБ-КОДИНГ</h3>
+                <p style="color:#b9c3db;">Работаем в комфортном ритме, но без компромиссов по дедлайнам. Эстетика чистого кода и драйва.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="team">
+        <div class="section-title">НАША МОЛОДАЯ СИЛА 🚀</div>
+        <div class="section-sub">Три человека, которые дополняют друг друга: от хардкорного бэкенда до «всё учту и всё поддержу»</div>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="avatar-icon"><i class="fas fa-code"></i></div>
+                <div class="team-name">Дари</div>
+                <div class="team-role">ДИРЕКТОР · ВЕДУЩИЙ ИНЖЕНЕР</div>
+                <div><span class="skill-tag">C++ senior</span><span class="skill-tag">C# senior</span><span class="skill-tag">JS mid</span><span class="skill-tag">вайб-кодинг</span></div>
+                <div class="dev-level">🎯 20 лет • 5+ лет коммерческого опыта (фриланс + пет-проекты)</div>
+                <div class="vibe-note"><i class="fas fa-music"></i>  "Пишу красивую архитектуру под лоу-фай биты, горю созданием надежных систем."</div>
+            </div>
+            <div class="team-card">
+                <div class="avatar-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="team-name">Денис</div>
+                <div class="team-role">FULL-STACK РАЗРАБОТЧИК (JUNIOR+/MID-)</div>
+                <div><span class="skill-tag">TypeScript</span><span class="skill-tag">React</span><span class="skill-tag">Node.js</span><span class="skill-tag">C#</span></div>
+                <div class="dev-level">⚡ быстро обучается • уровень между junior и middle • реальный код на проде</div>
+                <div class="vibe-note"><i class="fas fa-chalkboard-user"></i>  За месяц освоил новый стек под проект. Могу закрыть задачи разной сложности.</div>
+            </div>
+            <div class="team-card">
+                <div class="avatar-icon"><i class="fas fa-calculator"></i></div>
+                <div class="team-name">Анастасия</div>
+                <div class="team-role">БУХГАЛТЕР · ПОМОЩНИК ДИРЕКТОРА</div>
+                <div><span class="skill-tag">1С: базово</span><span class="skill-tag">Python (intro)</span><span class="skill-tag">документооборот</span><span class="skill-tag">финансы для самозанятых</span></div>
+                <div class="dev-level">🧮 разбирается в программировании (beginner-уровень), помогает с отладкой скриптов и администрированием</div>
+                <div class="vibe-note"><i class="fas fa-hand-holding-usd"></i>  Отвечаю за чистоту договоров как физлица, налоги, счета — вы не думаете о бюрократии.</div>
+            </div>
+        </div>
+        <p style="margin-top: 32px; text-align: center; font-size: 0.9rem; background: #00000030; border-radius: 60px; padding: 12px; max-width: 500px; margin-left: auto; margin-right: auto;">
+            <i class="fas fa-shield-alt"></i>   Не ИП и не ООО — работаем как команда физлиц по договору. Прозрачно, без НДС и кассовых аппаратов.
+        </p>
+    </section>
+
+    <section id="services">
+        <div class="section-title">МЫ СОЗДАЁМ РЕШЕНИЯ, КОТОРЫЕ РАБОТАЮТ</div>
+        <div class="section-sub">От высоконагруженных бэкендов до прототипов за неделю — даём то, что нужно бизнесу.</div>
+        <div class="services-grid">
+            <div class="service-item">
+                <i class="fas fa-microchip"></i>
+                <h3>C++ / C# ЯДРО</h3>
+                <p>Системное ПО, игры на Unity, высокопроизводительные сервисы. senior-уровень от Дари.</p>
+            </div>
+            <div class="service-item">
+                <i class="fab fa-js"></i>
+                <h3>JS/TS FULLSTACK</h3>
+                <p>React, Node.js, Express — адаптивные веб-приложения. Сильная мидл-экспертиза.</p>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-brain"></i>
+                <h3>ВАЙБ‑КОДИНГ & ПРОТОТИПЫ</h3>
+                <p>«Быстрый вход в проект»: за несколько дней делаем MVP, лендинг или админку без переплат.</p>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-chart-line"></i>
+                <h3>КОНСАЛТИНГ & РОСТ КОДА</h3>
+                <p>Поможем студентам, стартапам, подтянем код-ревью. Наши ребята учат и учатся вместе с вами.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="vibe-quote" style="margin: 0 0 40px 0;">
+        <i class="fas fa-quote-right"></i>
+        <p style="font-size: 1.3rem; margin: 16px 0; max-width: 700px; margin-left: auto; margin-right: auto;">Мы не гонимся за корпоративным статусом, мы гонимся за результатом и атмосферой доверия. Клиент всегда знает, кто именно делает его проект.</p>
+        <div>— Дари, 20 лет, основатель VideStarck</div>
+    </div>
+
+    <section id="contact">
+        <div class="section-title" style="text-align: center;">ГОТОВЫ ОБСУДИТЬ ВАШ ПРОЕКТ?</div>
+        <div class="section-sub" style="text-align: center; margin-left: auto; margin-right: auto;">Оставьте заявку — и мы свяжемся с вами в течение 2 часов. Честные сроки, прямая коммуникация с разработчиками.</div>
+        <div class="contact-form">
+            <form action="https://formsubmit.co/dariocirzapova98@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="Новая заявка с сайта VideStarck!">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://coruscating-starlight-ab1698.netlify.app/#contact?success=true">
+                <div class="form-group">
+                    <input type="text" name="Имя" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="Email или Telegram" placeholder="Email или Telegram" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="Сообщение" rows="3" placeholder="Коротко о задаче / идее, стеке..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="background: #8b5cf6; width:100%;">ОТПРАВИТЬ →</button>
+                <p style="font-size: 0.7rem; text-align: center; margin-top: 14px; color:#7e85a1;">Нажимая, вы соглашаетесь на обработку данных. Письмо придёт на почту Дари.</p>
+            </form>
+        </div>
+        <div class="contact-links">
+            <a href="mailto:dariocirzapova98@gmail.com"><i class="fas fa-envelope"></i> dariocirzapova98@gmail.com</a>
+            <a href="tel:+89243932131"><i class="fas fa-phone-alt"></i> 8 (924) 393-21-31</a>
+            <a href="https://www.instagram.com/da.ri3130" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> instagram.com/da.ri3130</a>
+        </div>
+        <p style="text-align: center; margin-top: 24px; font-size: 0.85rem; color:#8c93ab;">📩 Пишите в любое время — отвечаем оперативно, как физические лица без выходных</p>
+    </section>
+
+    <footer>
+        <p>© 2025 VIDEOSTARCK — КОМАНДА ФИЗИЧЕСКИХ ЛИЦ, ПОЛНАЯ ОТВЕТСТВЕННОСТЬ ЗА ПРОДУКТ. НЕ ЯВЛЯЕМСЯ ЮРЛИЦОМ, НО ДАЁМ ГАРАНТИИ ДОГОВОРОМ. <i class="fas fa-heart" style="color:#c084fc;"></i> ВАЙБ-КОДИНГ</p>
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if(targetId === "#" || targetId === "") return;
+            const targetElement = document.querySelector(targetId);
+            if(targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    if (window.location.href.includes('success=true')) {
+        const successDiv = document.createElement('div');
+        successDiv.textContent = 'Спасибо! Мы зарядились вашим вайбом и скоро ответим ✨';
+        successDiv.style.backgroundColor = 'rgba(139,92,246,0.2)';
+        successDiv.style.color = '#c084fc';
+        successDiv.style.padding = '12px';
+        successDiv.style.borderRadius = '40px';
+        successDiv.style.textAlign = 'center';
+        successDiv.style.marginTop = '20px';
+        const formContainer = document.querySelector('.contact-form');
+        if (formContainer) formContainer.appendChild(successDiv);
+        setTimeout(() => successDiv.remove(), 5000);
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+</script>
+</body>
+</html>
